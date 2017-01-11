@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="UI.vGroupTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:data="clr-namespace:LiteDatabase;assembly=LiteDatabase">
+
+    <DataGrid x:Name="gridSongs" 
+              AutoGenerateColumns="True"
+              ItemsSource="{Binding Songs}"
+              ColumnWidth="*">
+        <!--<DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding Artist.Name}" Header="Artist" />
+            <DataGridTextColumn Binding="{Binding Title}" Header="Title" />
+            <DataGridComboBoxColumn Header="Статус" Width="*"
+                                    SelectedItemBinding="{Binding Status}"
+                                    DisplayMemberPath="Name" SelectedValuePath="Id"
+                                    ItemsSource="{Binding Source={x:Static data:ContextManager.Statuses}}" />
+            <DataGridTextColumn Binding="{Binding Genre.Name}" Header="Genre" />
+        </DataGrid.Columns>-->
+    </DataGrid>
+</UserControl>
