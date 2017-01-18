@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using Repertoire;
+﻿using Repertoire;
 
 namespace UI
 {

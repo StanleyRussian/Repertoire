@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using LiteDatabase;
 using Repertoire;
 
 namespace UI
@@ -21,9 +11,31 @@ namespace UI
     /// </summary>
     public partial class vGroupTab
     {
+        vmGroupTab _context;
+
         public vGroupTab()
         {
             InitializeComponent();
+        }
+
+        private void _context_NodeAdded(object sender, ProgressNodeEventArgs e)
+        {
+            gridSongs.Columns.Add(new DataGridCheckBoxColumn
+            {
+                Header = e.Node.Name,
+                Width = 75,
+                ElementStyle = (Style) FindResource("MetroDataGridCheckBox")
+            });
+        }
+
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            _context = DataContext as vmGroupTab;
+            if (_context != null) _context.NodeAdded += _context_NodeAdded;
+
+            foreach (var node in ContextManager.Nodes)
+                _context_NodeAdded(this, new ProgressNodeEventArgs { Node = node });
         }
     }
 }

@@ -10,17 +10,6 @@ namespace ConsoleTestApp
 
         static void Main(string[] args)
         {
-            //=== For SQL LocalDb
-            //Entities model = new Entities();
-            //foreach (var genre in model.Genres)
-            //    Console.WriteLine(genre.Name);
-            //Console.ReadLine();
-
-            //=== Self-made model
-            //var model = new Model();
-            //Console.WriteLine(model.Genres);
-            //Console.ReadLine();
-
             foreach (var group in model.Groups)
             {
                 var SongsInGroup = model.Songs.Where(x => x.Groups.Any(y => y.Id == group.Id));

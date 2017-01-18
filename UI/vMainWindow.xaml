@@ -5,10 +5,18 @@
                       xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
                       xmlns:repertoire="clr-namespace:Repertoire;assembly=Repertoire"
                       xmlns:ui="clr-namespace:UI"
+                      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                       dialog:DialogParticipation.Register="{Binding}"
                       Title="Répertoire"
                       GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
                       xml:lang="ru">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding cmdOnClosing}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <TabControl ItemsSource="{Binding Tabs}"
                 controls:TabControlHelper.IsUnderlined="True"
                 Margin="5">

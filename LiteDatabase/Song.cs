@@ -13,6 +13,9 @@ namespace LiteDatabase
         [StringLength(2147483647)]
         public string Title { get; set; }
 
+        [StringLength(2147483647)]
+        public string LastPlayedDate { get; set; }
+
         [Required]
         public long ArtistId { get; set; }
         [ForeignKey("ArtistId")]

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using LiteDatabase;
 
 namespace Repertoire
@@ -29,5 +25,11 @@ namespace Repertoire
         }
 
         public ObservableCollection<vmGroupTab> Tabs { get; private set; }
+
+        public ICommand cmdOnClosing { get; private set; }
+        protected void cmdOnClosing_Execute()
+        {
+            ContextManager.Context.SaveChanges();
+        }
     }
 }

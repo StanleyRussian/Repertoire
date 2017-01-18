@@ -1,20 +1,39 @@
 ﻿<UserControl x:Class="UI.vGroupTab"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:data="clr-namespace:LiteDatabase;assembly=LiteDatabase">
+             xmlns:data="clr-namespace:LiteDatabase;assembly=LiteDatabase"
+             Loaded="OnLoaded">
 
-    <DataGrid x:Name="gridSongs" 
-              AutoGenerateColumns="True"
+    <DataGrid x:Name="gridSongs"
+              AutoGenerateColumns="False"
               ItemsSource="{Binding Songs}"
-              ColumnWidth="*">
-        <!--<DataGrid.Columns>
+              ColumnWidth="*"
+              CanUserAddRows="False">
+        <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Artist.Name}" Header="Artist" />
             <DataGridTextColumn Binding="{Binding Title}" Header="Title" />
-            <DataGridComboBoxColumn Header="Статус" Width="*"
+            <DataGridComboBoxColumn Header="Status" Width="*"
                                     SelectedItemBinding="{Binding Status}"
                                     DisplayMemberPath="Name" SelectedValuePath="Id"
-                                    ItemsSource="{Binding Source={x:Static data:ContextManager.Statuses}}" />
+                                    ItemsSource="{Binding Source={x:Static data:ContextManager.Statuses}}"/>
             <DataGridTextColumn Binding="{Binding Genre.Name}" Header="Genre" />
-        </DataGrid.Columns>-->
+            
+            <DataGridTemplateColumn Header="Last Played"
+                                    Width="auto">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Text="{Binding LastPlayedDate}"
+                                     Width="130"/>
+                            <Button Command="{Binding cmdSetLastPlayedToday}" 
+                                    Content="Today"
+                                    Style="{StaticResource _AccentedSquareButtonStyle}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            
+            <!--<DataGridTextColumn Binding="{Binding LastPlayedDate}" Header="Last Played" />-->
+        </DataGrid.Columns>
     </DataGrid>
 </UserControl>
