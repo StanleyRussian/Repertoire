@@ -49,10 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auxiliary\SimpleCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="vmGroupTab.cs" />
     <Compile Include="vmMainWindow.cs" />
+    <Compile Include="wrapSong.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LiteDatabase\LiteDatabase.csproj">

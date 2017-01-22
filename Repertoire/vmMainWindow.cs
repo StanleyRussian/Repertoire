@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using LiteDatabase;
+using ViewModels.Auxiliary;
 
 namespace Repertoire
 {
@@ -22,6 +23,8 @@ namespace Repertoire
                 Group = null,
                 Header = "Without group"
             });
+
+            cmdOnClosing = new Command(cmdOnClosing_Execute);
         }
 
         public ObservableCollection<vmGroupTab> Tabs { get; private set; }

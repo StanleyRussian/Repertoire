@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace LiteDatabase
 {
@@ -18,5 +19,18 @@ namespace LiteDatabase
         private static ObservableCollection<ProgressNode> _nodes;
         public static ObservableCollection<ProgressNode> Nodes
             => _nodes ?? (_nodes = new ObservableCollection<ProgressNode>(_context.ProgressNodes));
+
+        public static void AddNodeToSong(string argNode, string argSong, string argGroup)
+        {
+            var node = Context.ProgressNodes.First(x => x.Name == argNode);
+            var song = Context.Songs.First(x => x.Title == argSong && x.Groups.Any(y => y.Name == argGroup));
+
+            song.ProgressNodes.Add(node);
+        }
+
+        public static void RemoveNodeFromSong(string argNode, string argSong, string argGroup)
+        {
+            
+        }
     }
 }
