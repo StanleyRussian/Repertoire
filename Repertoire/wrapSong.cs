@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 using LiteDatabase;
 using ViewModels.Auxiliary;
@@ -56,23 +55,23 @@ namespace Repertoire
             => _groups ?? (_groups = new ObservableCollection<Group>(_song.Groups));
 
         private ObservableCollection<wrapProgressNode> _progressNodes;
-        public ObservableCollection<wrapProgressNode> ProgressNodes
-        {
-            get
-            {
-                if (_progressNodes.Count == 0)
-                {
-                    foreach (var node in _song.ProgressNodes)
-                        _progressNodes.Add(new wrapProgressNode { Name = node.Name, Set = true });
-                    foreach (var node in ContextManager.Nodes)
-                    {
-                        if (_progressNodes.All(x => x.Name != node.Name))
-                            _progressNodes.Add(new wrapProgressNode { Name = node.Name, Set = false });
-                    }
-                }
-                return _progressNodes;
-            }
-        }
+        //public ObservableCollection<wrapProgressNode> ProgressNodes
+        //{
+        //    get
+        //    {
+        //        if (_progressNodes.Count == 0)
+        //        {
+        //            foreach (var node in _song.ProgressNodes)
+        //                _progressNodes.Add(new wrapProgressNode { Name = node.Name, Set = true });
+        //            foreach (var node in ContextManager.Nodes)
+        //            {
+        //                if (_progressNodes.All(x => x.Name != node.Name))
+        //                    _progressNodes.Add(new wrapProgressNode { Name = node.Name, Set = false });
+        //            }
+        //        }
+        //        return _progressNodes;
+        //    }
+        //}
 
         public ICommand cmdSetLastPlayedToday { get; private set; }
         private void cmdSetLastPlayedToday_Execute(object argSelected)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using LiteDatabase;
 
@@ -13,40 +14,68 @@ namespace ConsoleTestApp
             foreach (var group in model.Groups)
             {
                 var SongsInGroup = model.Songs.Where(x => x.Groups.Any(y => y.Id == group.Id));
+                Console.WriteLine("Group: " + group.Name);
                 if (SongsInGroup.Any())
-                {
-                    Console.WriteLine("Group: " + group.Name);
                     PrintSongsOfGroup(SongsInGroup);
-                }
                 else
-                    Console.WriteLine("Empty group: " + group.Name + "\n");
+                    Console.WriteLine("EMPTY\n");
             }
 
             var SongsWithoutGroup = model.Songs.Where(x => !x.Groups.Any());
-            Console.WriteLine("\nDon't belong to any group: ");
-            PrintSongsOfGroup(SongsWithoutGroup);
+            if (SongsWithoutGroup.Any())
+            {
+                Console.WriteLine("Don't belong to any group: ");
+                PrintSongsOfGroup(SongsWithoutGroup);
+            }
+
             Console.ReadLine();
         }
 
-        private static void PrintSongsOfGroup(IQueryable<Song> SongsInGroup)
+        private static void PrintSongsOfGroup(IQueryable<Song> argSongsInGroup)
         {
             foreach (var genre in model.Genres)
             {
-                var SongsOfGenre = SongsInGroup.Where(x => x.Genre.Id == genre.Id);
+                var SongsOfGenre = argSongsInGroup.Where(x => x.Genre.Id == genre.Id);
                 if (SongsOfGenre.Any())
                 {
-                    Console.WriteLine("  Genre: " + genre.Name);
-                    foreach (var song in SongsOfGenre)
-                    {
-                        Console.WriteLine("    " + song.Artist.Name + " - " + song.Title + "\"");
-                        foreach (var filepath in song.Filepaths)
-                            Console.WriteLine("      " + filepath.Path);
-                        Console.Write("      Progress:\t");
-                        foreach (var node in song.ProgressNodes)
-                            Console.Write(node.Name + "\t");
-                        Console.WriteLine("\n    " + song.Status.Name + "\n");
-                    }
+                    Console.WriteLine("|--Genre: " + genre.Name);
+                    PrintSongsOfGenre(SongsOfGenre);
                 }
+            }
+
+            var SongsWithoutGenre = argSongsInGroup.Where(x=>x.Genre == null);
+            if (SongsWithoutGenre.Any())
+            {
+                Console.WriteLine("|--Without Genre:");
+                PrintSongsOfGenre(SongsWithoutGenre);
+            }
+            Console.WriteLine();
+        }
+
+        private static void PrintSongsOfGenre(IQueryable<Song> argSongsInGenre)
+        {
+            foreach (var song in argSongsInGenre)
+            {
+                Console.WriteLine("|  |--" + song.Artist.Name + " - \"" + song.Title + "\" - " + song.Status.Name);
+
+                foreach (var filepath in song.Filepaths)
+                    Console.WriteLine("|  |     " + filepath.Path);
+
+                Console.Write("|  |     Progress:\t");
+
+                model.ProgressNodes.Load();
+                foreach (var nodeSong in song.rProgressNodeSongs)
+                {
+                    if (nodeSong.ProgressNode == null)
+                    {
+                        Console.Write("! ");
+                        Console.Write(model.ProgressNodes.Find(nodeSong.ProgressNodeId).Name + "\t");
+                    }
+                    else
+                    Console.Write(nodeSong.ProgressNode.Name + "\t");
+                }
+
+                Console.WriteLine();
             }
         }
     }

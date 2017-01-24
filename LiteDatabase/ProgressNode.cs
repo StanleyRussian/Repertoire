@@ -14,6 +14,6 @@ namespace LiteDatabase
         [StringLength(2147483647)]
         public string Name { get; set; }
 
-        public virtual ICollection<Song> Songs { get; set; }
+        public virtual ICollection<rProgressNodeSong> rProgressNodeSongs { get; set; }
     }
 }

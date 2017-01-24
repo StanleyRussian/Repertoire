@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Data;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -16,7 +16,10 @@ namespace UI
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var dataGridCell = value as DataGridCell;
+
             var currentSong = dataGridCell.DataContext as wrapSong;
+            var nodeName = (string)tagNode.GetTag(dataGridCell.Column);
+            var groupName = (string)tagGroup.GetTag(dataGridCell.Column);
 
             if (dataGridCell.IsEditing)
             {
@@ -25,10 +28,14 @@ namespace UI
                 checkBox.Unchecked += CheckBoxOnUnchecked;
             }
 
-            return ContextManager.Context.Songs.Any(
+            var any = ContextManager.Context.Songs.Any(
                 x =>
                     x.Title == currentSong.Title &&
-                    x.ProgressNodes.Any(y => y.Name == (string) dataGridCell.Column.Header));
+                    x.rProgressNodeSongs.Any(y =>
+                                                 y.ProgressNode.Name == nodeName &&
+                                                 y.Group.Name == groupName));
+
+            return any;
         }
 
         private void CheckBoxOnUnchecked(object sender, RoutedEventArgs e)

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using LiteDatabase;
@@ -51,8 +50,8 @@ namespace UI
 
             _context.NodeAdded += _context_NodeAdded;
 
-            foreach (var node in ContextManager.Nodes)
-                _context_NodeAdded(this, new ProgressNodeEventArgs { Node = node });
+            //foreach (var node in ContextManager.Nodes)
+            //    _context_NodeAdded(this, new ProgressNodeEventArgs { Node = node });
         }
     }
 }

@@ -24,19 +24,9 @@ namespace LiteDatabase
                 .WithMany(t => t.Songs)
                 .Map(m =>
                 {
-                    m.ToTable("r_GroupSong");
+                    m.ToTable("rGroupSong");
                     m.MapLeftKey("SongId");
                     m.MapRightKey("GroupId");
-                });
-
-            modelBuilder.Entity<Song>()
-                .HasMany(t => t.ProgressNodes)
-                .WithMany(t => t.Songs)
-                .Map(m =>
-                {
-                    m.ToTable("r_ProgressNodeSong");
-                    m.MapLeftKey("SongId");
-                    m.MapRightKey("ProgressNodeId");
                 });
         }
     }

@@ -20,12 +20,23 @@ namespace LiteDatabase
         public static ObservableCollection<ProgressNode> Nodes
             => _nodes ?? (_nodes = new ObservableCollection<ProgressNode>(_context.ProgressNodes));
 
-        public static void AddNodeToSong(string argNode, string argSong, string argGroup)
+        public static void AddNodeToSong(string argNode, string argSong, string argGroup = "")
         {
             var node = Context.ProgressNodes.First(x => x.Name == argNode);
-            var song = Context.Songs.First(x => x.Title == argSong && x.Groups.Any(y => y.Name == argGroup));
+            var group = Context.Groups.First(x => x.Name == argGroup);
+            var song =
+                Context.Songs.First(
+                    x =>
+                        x.Title == argSong && 
+                        x.Groups.Any(y => y.Name == argGroup) &&
+                        x.rProgressNodeSongs.Any(y => y.ProgressNode.Name == argNode));
 
-            song.ProgressNodes.Add(node);
+            song.rProgressNodeSongs.Add(new rProgressNodeSong
+            {
+                Song = song,
+                ProgressNode = node,
+                Group = group
+            });
         }
 
         public static void RemoveNodeFromSong(string argNode, string argSong, string argGroup)

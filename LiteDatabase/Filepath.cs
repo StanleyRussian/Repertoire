@@ -15,7 +15,6 @@ namespace LiteDatabase
 
         [Required]
         public long SongId { get; set; }
-        [ForeignKey("SongId")]
         public Song Song { get; set; }
 
     }
