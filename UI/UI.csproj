@@ -100,9 +100,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="tagGroup.cs" />
-    <Compile Include="vcSongNode.cs" />
-    <Compile Include="tagNode.cs" />
+    <Compile Include="ValueConverters\vcSongNode.cs" />
     <Compile Include="vGroupTab.xaml.cs">
       <DependentUpon>vGroupTab.xaml</DependentUpon>
     </Compile>

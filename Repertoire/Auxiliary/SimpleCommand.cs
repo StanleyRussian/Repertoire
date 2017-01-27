@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ViewModels.Auxiliary
+namespace Repertoire.Auxiliary
 {
     /// <summary>
     /// The ViewModelCommand class - an ICommand that can fire a function.

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using LiteDatabase;
-using Repertoire.Annotations;
+using Repertoire.Properties;
 
 namespace Repertoire
 {

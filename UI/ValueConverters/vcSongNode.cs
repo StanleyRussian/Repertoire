@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
-using LiteDatabase;
 using Repertoire;
 
-namespace UI
+namespace UI.ValueConverters
 {
     class vcSongNode : IValueConverter
     {
