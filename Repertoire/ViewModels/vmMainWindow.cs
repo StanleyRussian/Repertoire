@@ -3,7 +3,7 @@ using System.Windows.Input;
 using LiteDatabase;
 using Repertoire.Auxiliary;
 
-namespace Repertoire
+namespace Repertoire.ViewModels
 {
     public class vmMainWindow
     {

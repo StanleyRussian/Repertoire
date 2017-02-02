@@ -4,9 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using LiteDatabase;
+using Repertoire.Notifications;
 using Repertoire.Properties;
 
-namespace Repertoire
+namespace Repertoire.ViewModels    
 {
     public class vmGroupTab:INotifyPropertyChanged
     {
@@ -16,6 +17,8 @@ namespace Repertoire
         public ObservableCollection<wrapSong> Songs { get; private set; }
 
         private bool _isSelected;
+        // This method is called when user selects a tab, so it's content can be loaded on demand.
+        // This call is defined in vMainWindow.xaml -> TabControl
         public bool IsSelected
         {
             get { return _isSelected; }
@@ -36,14 +39,19 @@ namespace Repertoire
                 foreach (var song in ContextManager.Context.Songs.Where(x => !x.Groups.Any()))
                     Songs.Add(new wrapSong(song));
             else
-                foreach (var song in ContextManager.Context.Songs.Where(x => x.Groups.Any(y => y.Name == Header)))
+                foreach (var song in ContextManager.Context.Songs.Where(x => x.Groups.Any(y => y.Name == Group.Name)))
                     Songs.Add(new wrapSong(song));
 
-            //NodeAdded?.Invoke(this, new ProgressNodeEventArgs {Node = ContextManager.Nodes.First()});
+            foreach (var node in ContextManager.Nodes)
+            {
+                DataColumnService.Instance.AddDynamicColumn.Raise(new AddDynamicColumnNotification {Node = node});
+            }
+
+            //foreach (var node in ContextManager.Nodes)
+            //    NodeAdded?.Invoke(this, new ProgressNodeEventArgs {Node = node});
         }
 
         public event EventHandler<ProgressNodeEventArgs> NodeAdded;
-        public event EventHandler<ProgressNodeEventArgs> NodeInitialise;
 
         public event PropertyChangedEventHandler PropertyChanged;
         [NotifyPropertyChangedInvocator]

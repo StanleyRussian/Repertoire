@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 
-namespace UI
+namespace UI.DependencyProperties
 {
-    public static class tagNode
+    class tagGroup
     {
         public static readonly DependencyProperty TagProperty = DependencyProperty.RegisterAttached(
-            "tagNode", typeof (string), typeof (tagNode), new FrameworkPropertyMetadata(null));
+            "tagGroup", typeof (string), typeof (tagGroup), new FrameworkPropertyMetadata(null));
 
         public static object GetTag(DependencyObject dependencyObject)
         {

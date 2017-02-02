@@ -100,11 +100,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Actions\AddDynamicColumnAction.cs" />
+    <Compile Include="Actions\AddTextColumnAction.cs" />
+    <Compile Include="Actions\ChangeDynamicColumnAction.cs" />
+    <Compile Include="Actions\DeleteDynamicColumnAction.cs" />
+    <Compile Include="InteractionRequest\InteractionRequestTrigger.cs" />
+    <Compile Include="InteractionRequest\TriggerActionBase.cs" />
+    <Compile Include="DependencyProperties\tagGroup.cs" />
+    <Compile Include="DependencyProperties\tagNode.cs" />
+    <Compile Include="Auxiliary\ResourceDictionaryResolver.cs" />
     <Compile Include="ValueConverters\vcSongNode.cs" />
-    <Compile Include="vGroupTab.xaml.cs">
+    <Compile Include="Views\vGroupTab.xaml.cs">
       <DependentUpon>vGroupTab.xaml</DependentUpon>
     </Compile>
-    <Page Include="vMainWindow.xaml">
+    <Page Include="Views\vMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -112,11 +121,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="vMainWindow.xaml.cs">
+    <Compile Include="Views\vMainWindow.xaml.cs">
       <DependentUpon>vMainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="vGroupTab.xaml">
+    <Page Include="Views\vGroupTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,10 +1,11 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using LiteDatabase;
-using Repertoire;
+using Repertoire.ViewModels;
+using UI.DependencyProperties;
 
-namespace UI
+namespace UI.Views
 {
     /// <summary>
     /// Interaction logic for vGroupTab.xaml
@@ -20,11 +21,12 @@ namespace UI
 
         private void _context_NodeAdded(object sender, ProgressNodeEventArgs e)
         {
+            if (gridSongs.Columns.Any(x=> (string) x.Header == e.Node.Name)) return;
+
             var binding = new Binding
             {
                 Converter = (IValueConverter) FindResource("SongNodeValueConverter"),
-                RelativeSource =
-                                      new RelativeSource(RelativeSourceMode.FindAncestor, typeof(DataGridCell), 1),
+                RelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor, typeof(DataGridCell), 1),
                 Path = new PropertyPath("."),
                 Mode = BindingMode.TwoWay
             };

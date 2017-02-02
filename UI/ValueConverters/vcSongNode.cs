@@ -5,7 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using LiteDatabase;
 using Repertoire;
+using UI.DependencyProperties;
 
 namespace UI.ValueConverters
 {

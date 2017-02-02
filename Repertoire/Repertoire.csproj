@@ -50,10 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auxiliary\SimpleCommand.cs" />
+    <Compile Include="DataColumnService.cs" />
+    <Compile Include="InteractionRequest\InteractionRequest.cs" />
+    <Compile Include="InteractionRequest\InteractionRequestedEventArgs.cs" />
+    <Compile Include="InteractionRequest\Notification.cs" />
+    <Compile Include="Notifications\AddDynamicColumnNotification.cs" />
+    <Compile Include="Notifications\AddTextColumnNotification.cs" />
+    <Compile Include="Notifications\ChangeDynamicColumnNotification.cs" />
+    <Compile Include="Notifications\DeleteDynamicColumnNotification.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="vmGroupTab.cs" />
-    <Compile Include="vmMainWindow.cs" />
+    <Compile Include="ViewModels\vmGroupTab.cs" />
+    <Compile Include="ViewModels\vmMainWindow.cs" />
     <Compile Include="wrapSong.cs" />
   </ItemGroup>
   <ItemGroup>
