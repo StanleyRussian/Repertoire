@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using LiteDatabase;
-using Repertoire.Properties;
 
 namespace Repertoire
 {
-    public class vmGroupTab:INotifyPropertyChanged
+    public class vmGroupTab: iInvoke
     {
         public Group Group { get; set; }
         public string Header { get; set; }
 
-        public ObservableCollection<wrapSong> Songs { get; private set; }
+        public ObservableCollection<Song> Songs { get; private set; }
 
         private bool _isSelected;
         public bool IsSelected
@@ -31,26 +28,19 @@ namespace Repertoire
         {
             // If [Group] property is null - it fills [Songs] collection with songs whch does not contained in any group
             // Otherwise it look for songs which contained in group with the name same as [Group]
-            Songs = new ObservableCollection<wrapSong>();
-            if (Group == null)
-                foreach (var song in ContextManager.Context.Songs.Where(x => !x.Groups.Any()))
-                    Songs.Add(new wrapSong(song));
-            else
-                foreach (var song in ContextManager.Context.Songs.Where(x => x.Groups.Any(y => y.Name == Header)))
-                    Songs.Add(new wrapSong(song));
+            Songs = new ObservableCollection<Song>();
+            Songs = Group == null
+                ? new ObservableCollection<Song>(ContextManager.Context.Songs.Where(x => !x.Groups.Any()))
+                : new ObservableCollection<Song>(ContextManager.Context.Songs.Where(x => x.Groups.Any(y => y.Name == Group.Name)));
 
-            //NodeAdded?.Invoke(this, new ProgressNodeEventArgs {Node = ContextManager.Nodes.First()});
+            foreach (var node in ContextManager.Nodes)
+                NodeInitialised?.Invoke(this, new ProgressNodeEventArgs {Node = node});
         }
 
         public event EventHandler<ProgressNodeEventArgs> NodeAdded;
-        public event EventHandler<ProgressNodeEventArgs> NodeInitialise;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public event EventHandler<ProgressNodeEventArgs> NodeInitialised;
+        public event EventHandler<ProgressNodeEventArgs> NodeChanged;
+        public event EventHandler<ProgressNodeEventArgs> NodeDeleted;
     }
 
     public class ProgressNodeEventArgs : EventArgs

@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
+using LiteDatabase;
 using Repertoire;
 
 namespace UI.ValueConverters
@@ -15,7 +16,7 @@ namespace UI.ValueConverters
         {
             var dataGridCell = value as DataGridCell;
 
-            var currentSong = dataGridCell.DataContext as wrapSong;
+            var currentSong = dataGridCell.DataContext as Song;
             var nodeName = (string)tagNode.GetTag(dataGridCell.Column);
             var groupName = (string)tagGroup.GetTag(dataGridCell.Column);
 
@@ -48,7 +49,7 @@ namespace UI.ValueConverters
 
             var nodeName = (string) tagNode.GetTag(dataGridCell.Column);
             var groupName = (string) tagGroup.GetTag(dataGridCell.Column);
-            var currentSong = dataGridCell.DataContext as wrapSong;
+            var currentSong = dataGridCell.DataContext as Song;
 
             ContextManager.AddNodeToSong(nodeName, currentSong.Title, groupName);
         }
