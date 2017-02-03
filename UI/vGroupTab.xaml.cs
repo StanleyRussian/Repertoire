@@ -9,9 +9,6 @@ namespace UI
     /// </summary>
     public partial class vGroupTab
     {
-        private vmGroupTab _context;
-        private aDynamicGridManager _gridManager;
-
         public vGroupTab()
         {
             InitializeComponent();
@@ -19,8 +16,7 @@ namespace UI
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            _context = DataContext as vmGroupTab;
-            _gridManager = new GridProgressNodeManager(_context, gridSongs);
+            GridProgressNodeManager.Initialize(gridSongs);
         }
     }
 }

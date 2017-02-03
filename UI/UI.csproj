@@ -101,7 +101,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GridProgressNodeManager.cs" />
-    <Compile Include="aDynamicGridManager.cs" />
     <Compile Include="ResourceDictionaryResolver.cs" />
     <Compile Include="tagGroup.cs" />
     <Compile Include="tagNode.cs" />

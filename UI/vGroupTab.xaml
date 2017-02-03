@@ -9,6 +9,13 @@
               ItemsSource="{Binding Songs}"
               ColumnWidth="*"
               CanUserAddRows="False">
+        
+        <DataGrid.ContextMenu>
+            <ContextMenu>
+                <MenuItem />
+            </ContextMenu>
+        </DataGrid.ContextMenu>
+        
         <DataGrid.Columns>
             <DataGridTextColumn Binding="{Binding Artist.Name}" Header="Artist" />
             <DataGridTextColumn Binding="{Binding Title}" Header="Title" />
@@ -16,8 +23,9 @@
                                     SelectedItemBinding="{Binding Status}"
                                     DisplayMemberPath="Name" SelectedValuePath="Id"
                                     ItemsSource="{Binding Source={x:Static data:ContextManager.Statuses}}"/>
-            <DataGridTextColumn Binding="{Binding Genre.Name}" Header="Genre" />
             
+            <!--<DataGridTextColumn Binding="{Binding Genre.Name}" Header="Genre" />-->
+
             <DataGridTemplateColumn Header="Last Played"
                                     Width="auto">
                 <DataGridTemplateColumn.CellTemplate>
@@ -34,8 +42,6 @@
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
-            
-            <!--<DataGridTextColumn Binding="{Binding LastPlayedDate}" Header="Last Played" />-->
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

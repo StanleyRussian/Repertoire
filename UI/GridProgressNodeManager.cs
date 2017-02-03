@@ -1,25 +1,26 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
+using LiteDatabase;
 using Repertoire;
 
 namespace UI
 {
-    public class GridProgressNodeManager: aDynamicGridManager
+    public static class GridProgressNodeManager
     {
-        protected string groupName;
+        private static DataGrid grid;
 
-        public GridProgressNodeManager(iInvoke argContext, DataGrid argGrid)
-            :base(argContext, argGrid)
+        public static void Initialize(DataGrid argGrid)
         {
-            var tab = argContext as vmGroupTab;
-            groupName = tab.Group.Name;
-
-            context.CallbackSubscribed();
+            grid = argGrid;
+            foreach (var node in ContextManager.Nodes)
+                NodeInitialized(node);
         }
 
-        protected override void NodeAdded(object sender, ProgressNodeEventArgs e)
+        public static void NodeAdded(ProgressNode argNode)
         {
             var resourceDictionary = ResourceDictionaryResolver.GetResourceDictionary("Styles.xaml");
             var userRoleValueConverter = resourceDictionary["SongNodeValueConverter"] as IValueConverter;
@@ -28,35 +29,38 @@ namespace UI
             var binding = new Binding
             {
                 Converter = userRoleValueConverter,
-                RelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor, typeof(DataGridCell), 1),
+                RelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor, typeof (DataGridCell), 1),
                 Path = new PropertyPath("."),
                 Mode = BindingMode.TwoWay
             };
 
             var checkBoxColumn = new DataGridCheckBoxColumn
             {
-                Header = e.Node.Name,
+                Header = argNode.Name,
                 Width = 75,
                 Binding = binding,
                 ElementStyle = checkBoxColumnStyle
             };
 
-            // !! TEMPORARY !!
-            var a = sender as vmGroupTab;
-
-            tagNode.SetTag(checkBoxColumn, e.Node.Name);
-            tagGroup.SetTag(checkBoxColumn, a.Group.Name);
+            tagNode.SetTag(checkBoxColumn, argNode.Name);
+            //tagGroup.SetTag(checkBoxColumn, a.Group.Name);
             grid.Columns.Add(checkBoxColumn);
         }
 
-        protected override void NodeChanged(object sender, ProgressNodeEventArgs e)
+        public static void NodeChanged()
         {
             throw new System.NotImplementedException();
         }
 
-        protected override void NodeDeleted(object sender, ProgressNodeEventArgs e)
+        public static void NodeDeleted()
         {
             throw new System.NotImplementedException();
+        }
+
+        public static void NodeInitialized(ProgressNode argNode)
+        {
+            if (grid.Columns.All(x => (string) x.Header != argNode.Name))
+                NodeAdded(argNode);
         }
     }
 }
