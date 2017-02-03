@@ -8,14 +8,15 @@ namespace UI
 {
     public class GridProgressNodeManager: aDynamicGridManager
     {
-        private string groupName;
+        protected string groupName;
 
         public GridProgressNodeManager(iInvoke argContext, DataGrid argGrid)
             :base(argContext, argGrid)
         {
-            var context = argContext as vmGroupTab;
-            if (context == null) throw new ArgumentNullException(nameof(context));
-            groupName = context.Group.Name;
+            var tab = argContext as vmGroupTab;
+            groupName = tab.Group.Name;
+
+            context.CallbackSubscribed();
         }
 
         protected override void NodeAdded(object sender, ProgressNodeEventArgs e)
@@ -40,8 +41,11 @@ namespace UI
                 ElementStyle = checkBoxColumnStyle
             };
 
+            // !! TEMPORARY !!
+            var a = sender as vmGroupTab;
+
             tagNode.SetTag(checkBoxColumn, e.Node.Name);
-            tagGroup.SetTag(checkBoxColumn, groupName);
+            tagGroup.SetTag(checkBoxColumn, a.Group.Name);
             grid.Columns.Add(checkBoxColumn);
         }
 

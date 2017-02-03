@@ -32,15 +32,18 @@ namespace Repertoire
             Songs = Group == null
                 ? new ObservableCollection<Song>(ContextManager.Context.Songs.Where(x => !x.Groups.Any()))
                 : new ObservableCollection<Song>(ContextManager.Context.Songs.Where(x => x.Groups.Any(y => y.Name == Group.Name)));
-
-            foreach (var node in ContextManager.Nodes)
-                NodeInitialised?.Invoke(this, new ProgressNodeEventArgs {Node = node});
         }
 
         public event EventHandler<ProgressNodeEventArgs> NodeAdded;
         public event EventHandler<ProgressNodeEventArgs> NodeInitialised;
         public event EventHandler<ProgressNodeEventArgs> NodeChanged;
         public event EventHandler<ProgressNodeEventArgs> NodeDeleted;
+
+        public void CallbackSubscribed()
+        {
+            foreach (var node in ContextManager.Nodes)
+                NodeInitialised?.Invoke(this, new ProgressNodeEventArgs { Node = node });
+        }
     }
 
     public class ProgressNodeEventArgs : EventArgs

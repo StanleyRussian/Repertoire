@@ -100,8 +100,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DynamicGridManager.cs" />
-    <Compile Include="IDynamicGrid.cs" />
+    <Compile Include="GridProgressNodeManager.cs" />
+    <Compile Include="aDynamicGridManager.cs" />
     <Compile Include="ResourceDictionaryResolver.cs" />
     <Compile Include="tagGroup.cs" />
     <Compile Include="tagNode.cs" />

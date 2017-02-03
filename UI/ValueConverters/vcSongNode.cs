@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using LiteDatabase;
-using Repertoire;
 
 namespace UI.ValueConverters
 {

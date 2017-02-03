@@ -25,8 +25,10 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBox Text="{Binding LastPlayedDate}"
                                      Width="180"/>
-                            <Button Command="{Binding cmdSetLastPlayedToday}"
+                            <!--<Button Command="{Binding cmdSetLastPlayedToday}"
                                     Content="Today"
+                                    Style="{StaticResource _AccentedSquareButtonStyle}"/>-->
+                            <Button Content="Today"
                                     Style="{StaticResource _AccentedSquareButtonStyle}"/>
                         </StackPanel>
                     </DataTemplate>

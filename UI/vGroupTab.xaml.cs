@@ -20,8 +20,6 @@ namespace UI
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             _context = DataContext as vmGroupTab;
-            if (_context == null) throw new ArgumentNullException(nameof(_context));
-
             _gridManager = new GridProgressNodeManager(_context, gridSongs);
         }
     }

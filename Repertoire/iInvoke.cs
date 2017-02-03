@@ -8,5 +8,7 @@ namespace Repertoire
         event EventHandler<ProgressNodeEventArgs> NodeInitialised;
         event EventHandler<ProgressNodeEventArgs> NodeChanged;
         event EventHandler<ProgressNodeEventArgs> NodeDeleted;
+
+        void CallbackSubscribed();
     }
 }
