@@ -19,9 +19,11 @@ namespace UI
 
         public static void NodeAdded(ProgressNode argNode)
         {
-            var resourceDictionary = ResourceDictionaryResolver.GetResourceDictionary("Styles.xaml");
-            var userRoleValueConverter = resourceDictionary["SongNodeValueConverter"] as IValueConverter;
-            var checkBoxColumnStyle = resourceDictionary["MetroDataGridCheckBox"] as Style;
+            var mahappsDictionary = ResourceDictionaryResolver.GetResourceDictionary("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml");
+            var stylesDictionary = ResourceDictionaryResolver.GetResourceDictionary("Styles.xaml");
+
+            var userRoleValueConverter = stylesDictionary["SongNodeValueConverter"] as IValueConverter;
+            var checkBoxColumnStyle = mahappsDictionary["MetroDataGridCheckBox"] as Style;
 
             var binding = new Binding
             {

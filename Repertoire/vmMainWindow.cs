@@ -37,7 +37,7 @@ namespace Repertoire
         public ICommand cmdOnClosing { get; private set; }
         protected void cmdOnClosing_Execute()
         {
-            ContextManager.Context.SaveChanges();
+            //ContextManager.Context.SaveChanges();
         }
     }
 }
