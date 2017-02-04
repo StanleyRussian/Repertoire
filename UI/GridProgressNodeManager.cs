@@ -1,11 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
 using LiteDatabase;
-using Repertoire;
 
 namespace UI
 {
@@ -39,11 +36,11 @@ namespace UI
                 Header = argNode.Name,
                 Width = 75,
                 Binding = binding,
-                ElementStyle = checkBoxColumnStyle
+                ElementStyle = checkBoxColumnStyle,
+                EditingElementStyle = checkBoxColumnStyle
             };
 
             tagNode.SetTag(checkBoxColumn, argNode.Name);
-            //tagGroup.SetTag(checkBoxColumn, a.Group.Name);
             grid.Columns.Add(checkBoxColumn);
         }
 
