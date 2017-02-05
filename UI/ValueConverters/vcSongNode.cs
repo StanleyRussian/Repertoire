@@ -20,8 +20,8 @@ namespace UI.ValueConverters
             var group = vmMainWindow.SelectedTab.Group;
 
             var checkBox = dataGridCell.Content as CheckBox;
-                checkBox.Checked += CheckBoxOnChecked;
-                checkBox.Unchecked += CheckBoxOnUnchecked;
+            checkBox.Checked += CheckBoxOnChecked;
+            checkBox.Unchecked += CheckBoxOnUnchecked;
 
             bool result;
 
@@ -48,7 +48,8 @@ namespace UI.ValueConverters
         private void CheckBoxOnUnchecked(object sender, RoutedEventArgs e)
         {
             var checkBox = sender as CheckBox;
-            if (!checkBox.IsFocused)return;
+            if (!checkBox.IsFocused)
+                return;
 
             var dataGridCell = checkBox.Parent as DataGridCell;
             var nodeName = (string)tagNode.GetTag(dataGridCell.Column);
@@ -60,7 +61,8 @@ namespace UI.ValueConverters
         private void CheckBoxOnChecked(object sender, RoutedEventArgs e)
         {
             var checkBox = sender as CheckBox;
-            if (!checkBox.IsFocused) return;
+            if (!checkBox.IsFocused)
+                return;
 
             var dataGridCell = checkBox.Parent as DataGridCell;
             var nodeName = (string)tagNode.GetTag(dataGridCell.Column);

@@ -6,7 +6,6 @@ namespace LiteDatabase
     [Table("rProgressNodeSong")]
     public partial class rProgressNodeSong
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         public long Id { get; set; }
 

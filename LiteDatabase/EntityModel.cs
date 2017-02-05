@@ -17,6 +17,8 @@ namespace LiteDatabase
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<Artist> Artists { get; set; }
 
+        public virtual DbSet<rProgressNodeSong> RProgressNodeSongs { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Song>()

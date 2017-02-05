@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace LiteDatabase
@@ -23,49 +22,63 @@ namespace LiteDatabase
 
         public static void AddNodeToSong(string argNode, string argSong, string argGroup = "")
         {
-            // If such relationship already present throw Exception
-            if (Context.Songs.Any(
-                x =>
-                    x.Title == argSong &&
-                    x.Groups.Any(y => y.Name == argGroup) &&
-                    x.rProgressNodeSongs.Any(y => y.ProgressNode.Name == argNode)))
-                throw new Exception("Trying to add existing relationship");
+            // Due to behaviour of WPF this check is needed
+            if (Context.RProgressNodeSongs.Any(x => 
+                    x.Group.Name == argGroup && 
+                    x.ProgressNode.Name == argNode && 
+                    x.Song.Title == argSong))
+                return;
 
             var node = Context.ProgressNodes.First(x => x.Name == argNode);
-            var group = Context.Groups.First(x => x.Name == argGroup);
-            var song = Context.Songs.First(
-                x =>
-                    x.Title == argSong &&
-                    x.Groups.Any(y => y.Name == argGroup));
+            var group = Context.Groups.FirstOrDefault(x => x.Name == argGroup);
+            var song = Context.Songs.First(x => x.Title == argSong);
 
-            song.rProgressNodeSongs.Add(new rProgressNodeSong
-            {
-                Song = song,
-                ProgressNode = node,
-                Group = group
-            });
+            // [group] will be null due to [argGroup] being empty when songs without groups are selected
+            if (group != null)
+                song.rProgressNodeSongs.Add(new rProgressNodeSong
+                {
+                    Song = song,
+                    ProgressNode = node,
+                    Group = group
+                });
+            else
+                song.rProgressNodeSongs.Add(new rProgressNodeSong
+                {
+                    Song = song,
+                    ProgressNode = node,
+                });
 
             Context.SaveChanges();
         }
 
         public static void RemoveNodeFromSong(string argNode, string argSong, string argGroup)
         {
-            if (!Context.Songs.Any(
-                x =>
-                    x.Title == argSong &&
-                    x.Groups.Any(y => y.Name == argGroup) &&
-                    x.rProgressNodeSongs.Any(y => y.ProgressNode.Name == argNode)))
-                throw new Exception("Trying to remove non-existant relationship");
+            // Due to behaviour of WPF this check is needed
+            if (!Context.RProgressNodeSongs.Any(x =>
+                    x.Group.Name == argGroup &&
+                    x.ProgressNode.Name == argNode &&
+                    x.Song.Title == argSong))
+                return;
 
-            var song = Context.Songs.First(
-                x =>
-                    x.Title == argSong &&
-                    x.Groups.Any(y => y.Name == argGroup));
+            var group = Context.Groups.FirstOrDefault(x => x.Name == argGroup);
 
-            var progressNodeSong =
-                song.rProgressNodeSongs.First(x => x.ProgressNode.Name == argNode && x.Song.Title == argSong);
-
-            song.rProgressNodeSongs.Remove(progressNodeSong);
+            // [group] will be null due to [argGroup] being empty when songs without groups are selected
+            if (group != null)
+            {
+                var nodeSong = Context.RProgressNodeSongs.First(x => 
+                    x.Song.Title == argSong && 
+                    x.ProgressNode.Name == argNode && 
+                    x.Group.Name == argGroup);
+                Context.RProgressNodeSongs.Remove(nodeSong);
+            }
+            else
+            {
+                var nodeSong = Context.RProgressNodeSongs.First(x =>
+                    x.Song.Title == argSong &&
+                    x.ProgressNode.Name == argNode &&
+                    x.GroupId == null);
+                Context.RProgressNodeSongs.Remove(nodeSong);
+            }
 
             Context.SaveChanges();
         }
