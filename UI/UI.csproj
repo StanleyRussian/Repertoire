@@ -79,9 +79,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DependecyProperties\tagNode.cs" />
-    <Compile Include="DynamicGridManagers\GridProgressNodeManager.cs" />
-    <Compile Include="Auxiliary\ResourceDictionaryResolver.cs" />
     <Compile Include="ValueConverters\vcSongNode.cs" />
     <Compile Include="Views\vGroupTab.xaml.cs">
       <DependentUpon>vGroupTab.xaml</DependentUpon>
