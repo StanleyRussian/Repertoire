@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 
-namespace UI
+namespace DynamicGridManagers
 {
-    class tagGroup
+    public static class tagNode
     {
         public static readonly DependencyProperty TagProperty = DependencyProperty.RegisterAttached(
-            "tagGroup", typeof (string), typeof (tagGroup), new FrameworkPropertyMetadata(null));
+            "tagNode", typeof (string), typeof (tagNode), new FrameworkPropertyMetadata(null));
 
         public static object GetTag(DependencyObject dependencyObject)
         {

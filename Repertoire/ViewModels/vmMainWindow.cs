@@ -4,7 +4,7 @@ using System.Windows.Input;
 using LiteDatabase;
 using Repertoire.Auxiliary;
 
-namespace Repertoire
+namespace Repertoire.ViewModels
 {
     public class vmMainWindow
     {
@@ -36,8 +36,6 @@ namespace Repertoire
 
         public ICommand cmdOnClosing { get; private set; }
         protected void cmdOnClosing_Execute()
-        {
-            //ContextManager.Context.SaveChanges();
-        }
+        { }
     }
 }

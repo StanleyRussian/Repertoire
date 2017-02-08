@@ -20,6 +20,12 @@ namespace LiteDatabase
         public static ObservableCollection<ProgressNode> Nodes
             => _nodes ?? (_nodes = new ObservableCollection<ProgressNode>(_context.ProgressNodes));
 
+        public static void AddNewNode(ProgressNode argNode)
+        {
+            Context.ProgressNodes.Add(argNode);
+            Context.SaveChanges();
+        }
+
         public static void AddNodeToSong(string argNode, string argSong, string argGroup = "")
         {
             // Due to behaviour of WPF this check is needed

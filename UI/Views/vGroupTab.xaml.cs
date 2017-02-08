@@ -1,6 +1,7 @@
 ﻿using System.Windows;
+using DynamicGridManagers;
 
-namespace UI
+namespace UI.Views
 {
     /// <summary>
     /// Interaction logic for vGroupTab.xaml

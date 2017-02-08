@@ -4,8 +4,9 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using DynamicGridManagers;
 using LiteDatabase;
-using Repertoire;
+using Repertoire.ViewModels;
 
 namespace UI.ValueConverters
 {

@@ -1,8 +1,10 @@
-﻿<UserControl x:Class="UI.vGroupTab"
+﻿<UserControl x:Class="UI.Views.vGroupTab"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:data="clr-namespace:LiteDatabase;assembly=LiteDatabase"
-             Loaded="OnLoaded">
+             xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             Loaded="OnLoaded"
+             dialogs:DialogParticipation.Register="{Binding}">
 
     <DataGrid x:Name="gridSongs"
               AutoGenerateColumns="False"
@@ -12,7 +14,8 @@
         
         <DataGrid.ContextMenu>
             <ContextMenu>
-                <MenuItem />
+                <MenuItem Header="Add new node" 
+                          Command="{Binding cmdNewProgressNode}"/>
             </ContextMenu>
         </DataGrid.ContextMenu>
         

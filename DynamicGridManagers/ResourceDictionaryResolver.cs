@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows;
 
-namespace UI
+namespace DynamicGridManagers
 {
     public static class ResourceDictionaryResolver
     {

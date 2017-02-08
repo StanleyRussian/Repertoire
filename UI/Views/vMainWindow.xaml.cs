@@ -1,6 +1,6 @@
-﻿using Repertoire;
+﻿using Repertoire.ViewModels;
 
-namespace UI
+namespace UI.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

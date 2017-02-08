@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="UI.vMainWindow"
+﻿<controls:MetroWindow x:Class="UI.Views.vMainWindow"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -6,6 +6,8 @@
                       xmlns:repertoire="clr-namespace:Repertoire;assembly=Repertoire"
                       xmlns:ui="clr-namespace:UI"
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                      xmlns:viewModels="clr-namespace:Repertoire.ViewModels;assembly=Repertoire"
+                      xmlns:views="clr-namespace:UI.Views"
                       dialog:DialogParticipation.Register="{Binding}"
                       Title="Répertoire"
                       GlowBrush="{DynamicResource AccentColorBrush}" WindowStartupLocation="CenterScreen"
@@ -30,8 +32,8 @@
         </TabControl.ItemContainerStyle>
 
         <TabControl.Resources>
-            <DataTemplate DataType="{x:Type repertoire:vmGroupTab}">
-                <ui:vGroupTab />
+            <DataTemplate DataType="{x:Type viewModels:vmGroupTab}">
+                <views:vGroupTab />
             </DataTemplate>
         </TabControl.Resources>
 

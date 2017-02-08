@@ -1,11 +1,20 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
+using DynamicGridManagers;
 using LiteDatabase;
+using MahApps.Metro.Controls.Dialogs;
+using Repertoire.Auxiliary;
 
-namespace Repertoire
+namespace Repertoire.ViewModels
 {
     public class vmGroupTab
     {
+        public vmGroupTab()
+        {
+            cmdNewProgressNode = new Command(cmdNewProgressNode_Execute);
+        }
+
         public Group Group { get; set; }
         public string Header { get; set; }
 
@@ -21,6 +30,16 @@ namespace Repertoire
                 if (_isSelected)
                     Load();
             }
+        }
+
+        public ICommand cmdNewProgressNode { get; }
+        private async void cmdNewProgressNode_Execute()
+        {
+            var newNodeName = await DialogCoordinator.Instance.ShowInputAsync(this, "Creating progress node", "Type a name for a new node");
+            if (newNodeName == null) return;
+            var node = new ProgressNode {Name = newNodeName};
+            ContextManager.AddNewNode(node);
+            GridProgressNodeManager.NodeAdded(node);
         }
 
         private void Load()

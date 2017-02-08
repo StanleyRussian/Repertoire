@@ -1,7 +1,7 @@
+using System.Data.Entity;
+
 namespace LiteDatabase
 {
-    using System.Data.Entity;
-
     public partial class EntityModel : DbContext
     {
         public EntityModel()

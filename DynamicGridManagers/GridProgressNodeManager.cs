@@ -4,21 +4,25 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using LiteDatabase;
 
-namespace UI
+namespace DynamicGridManagers
 {
     public static class GridProgressNodeManager
     {
         private static DataGrid grid;
+        private static bool isInitialized;
 
         public static void Initialize(DataGrid argGrid)
         {
             grid = argGrid;
+            isInitialized = true;
             foreach (var node in ContextManager.Nodes)
                 NodeInitialized(node);
         }
 
         public static void NodeAdded(ProgressNode argNode)
         {
+            if (!isInitialized)return;
+
             var mahappsDictionary = ResourceDictionaryResolver.GetResourceDictionary("pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml");
             var stylesDictionary = ResourceDictionaryResolver.GetResourceDictionary("Styles.xaml");
 
@@ -46,19 +50,25 @@ namespace UI
             grid.Columns.Add(checkBoxColumn);
         }
 
-        public static void NodeChanged()
+        public static void NodeChanged(ProgressNode argNode)
         {
+            if (!isInitialized) return;
+
             throw new System.NotImplementedException();
         }
 
-        public static void NodeDeleted()
+        public static void NodeDeleted(ProgressNode argNode)
         {
+            if (!isInitialized) return;
+
             throw new System.NotImplementedException();
         }
 
         public static void NodeInitialized(ProgressNode argNode)
         {
-            if (grid.Columns.All(x => (string) x.Header != argNode.Name))
+            if (!isInitialized) return;
+
+            if (grid.Columns.All(x => (string) tagNode.GetTag(x) != argNode.Name))
                 NodeAdded(argNode);
         }
     }
